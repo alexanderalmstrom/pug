@@ -8,7 +8,7 @@
     "start": "yarn run server:dev",
     "server:dev": "NODE_ENV=development node ./server/development",
     "server:prod": "NODE_ENV=development node ./server/production",
-    "server:test": "NODE_ENV=development node server-test.js",
+    "server:test": "NODE_ENV=development node ./server-test.js",
     "build": "NODE_ENV=production webpack --bail -p"
   },
   "dependencies": {

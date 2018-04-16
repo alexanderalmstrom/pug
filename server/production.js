@@ -10,7 +10,7 @@ app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:htt
 
 app.use(express.static(path.resolve(__dirname, '..', 'build')))
 
-app.get('*', (req, res) => {
+app.get('*', function (req, res) {
   res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'))
 })
 

@@ -23,7 +23,7 @@ app.use(require("webpack-hot-middleware")(compiler, {
 }))
 
 if (devConfig.proxy) {
-  Object.keys(devConfig.proxy).forEach(function(context) {
+  Object.keys(devConfig.proxy).forEach(function (context) {
     app.use(proxyMiddleware(context, devConfig.proxy[context]))
   })
 }
