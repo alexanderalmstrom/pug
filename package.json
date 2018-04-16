@@ -5,7 +5,7 @@
   "author": "Alexander Almström <info@alexanderalmstrom.com>",
   "license": "MIT",
   "scripts": {
-    "start": "yarn run server",
+    "start": "yarn run server:dev",
     "server:dev": "NODE_ENV=development node ./server/development",
     "server:prod": "NODE_ENV=development node ./server/production",
     "server:test": "NODE_ENV=development node server-test.js",
