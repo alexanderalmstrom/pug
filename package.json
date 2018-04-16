@@ -1,15 +1,15 @@
 {
-  "name": "audiolab",
+  "name": "webpack-starter",
   "version": "1.0.0",
   "main": "index.js",
   "author": "Alexander Almström <info@alexanderalmstrom.com>",
   "license": "MIT",
   "scripts": {
     "start": "yarn run server",
-    "server": "NODE_ENV=development node server.js",
-    "server:dev": "NODE_ENV=development node webpack-dev-server.js",
-    "build": "NODE_ENV=production webpack --bail -p",
-    "deploy": "git push heroku master"
+    "server:dev": "NODE_ENV=development node ./server/development",
+    "server:prod": "NODE_ENV=development node ./server/production",
+    "server:test": "NODE_ENV=development node server-test.js",
+    "build": "NODE_ENV=production webpack --bail -p"
   },
   "dependencies": {
     "autoprefixer": "^8.3.0",
@@ -20,11 +20,13 @@
     "bourbon": "^5.0.0",
     "bourbon-neat": "^2.1.0",
     "clean-webpack-plugin": "^0.1.18",
+    "copy-webpack-plugin": "^4.5.1",
     "css-loader": "^0.28.9",
     "express": "^4.16.2",
     "extract-text-webpack-plugin": "v4.0.0-alpha.0",
     "http-proxy-middleware": "^0.18.0",
     "jquery": "^3.3.1",
+    "morgan": "^1.9.0",
     "node-sass": "^4.7.2",
     "normalize.css": "^8.0.0",
     "postcss-loader": "^2.0.10",

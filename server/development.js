@@ -4,7 +4,7 @@ const express = require('express')
 const http = require('http')
 const proxyMiddleware = require('http-proxy-middleware')
 
-const webpackConfig = require('./webpack.config')
+const webpackConfig = require('../webpack.config')
 const devConfig = webpackConfig.devServer
 const compiler = webpack(webpackConfig)
 

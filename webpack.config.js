@@ -2,6 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 const config = require('./index.js')
 const env = process.env.NODE_ENV
@@ -139,7 +140,13 @@ if (env == 'production') {
     new CleanWebpackPlugin([
       path.resolve(__dirname, 'build')
     ]),
-    new ExtractTextPlugin('stylesheets/application.bundle.css')
+    new ExtractTextPlugin('stylesheets/application.bundle.css'),
+    new CopyWebpackPlugin([
+      {
+        from: 'source/index.html',
+        to: 'index.html'
+      }
+    ])
   )
 }
 
