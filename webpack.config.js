@@ -72,7 +72,7 @@ if (env == 'development') {
   webpackConfig.entry.unshift(
     'webpack-hot-middleware/client'
   )
-  
+
   webpackConfig.module.rules.push(
     {
       test: /\.scss$/,
