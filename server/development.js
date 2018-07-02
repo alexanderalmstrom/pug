@@ -2,6 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 const express = require('express')
 const http = require('http')
+const morgan = require('morgan')
 const proxyMiddleware = require('http-proxy-middleware')
 
 const webpackConfig = require('../webpack.config')
@@ -11,6 +12,8 @@ const compiler = webpack(webpackConfig)
 const app = express()
 const server = http.createServer(app)
 const PORT = process.env.PORT || 5000
+
+app.use(morgan('dev'))
 
 app.use(require("webpack-dev-middleware")(compiler, {
   noInfo: true,

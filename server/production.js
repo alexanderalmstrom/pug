@@ -7,7 +7,7 @@ const app = express()
 const server = http.createServer(app)
 const PORT = process.env.PORT || 5000
 
-app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] :response-time ms'))
+app.use(morgan('combined'))
 
 app.use(express.static(path.resolve(__dirname, '..', 'build')))
 
