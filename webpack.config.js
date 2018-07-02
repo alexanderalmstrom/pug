@@ -3,6 +3,8 @@ const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const WriteFilePlugin = require('write-file-webpack-plugin')
+const SpriteLoaderPlugin = require('svg-sprite-loader/plugin')
 
 const config = require('./index.js')
 const env = process.env.NODE_ENV
@@ -11,7 +13,6 @@ const webpackConfig = {
   devServer: {
     contentBase: path.resolve(__dirname, 'source'),
     watchContentBase: false,
-    historyApiFallback: true,
     host: 'localhost',
     port: 5000,
     hot: true,
@@ -19,21 +20,22 @@ const webpackConfig = {
   },
 
   entry: [
-    './source/javascripts/application.js'
+    './source/main.js'
   ],
 
   resolve: {
     extensions: ['.scss', '.js', '.css', '.json'],
     modules: [
-      path.resolve(__dirname, 'source/stylesheets'),
-      path.resolve(__dirname, 'source/javascripts'),
+      path.resolve(__dirname, 'source', 'css'),
+      path.resolve(__dirname, 'source', 'js'),
+      path.resolve(__dirname, 'source', 'icons'),
       path.resolve(__dirname, 'node_modules')
     ]
   },
 
   output: {
     path: path.resolve(__dirname, 'build'),
-    filename: 'javascripts/application.bundle.js',
+    filename: 'js/app.bundle.js',
     publicPath: '/'
   },
 
@@ -48,6 +50,18 @@ const webpackConfig = {
             cacheDirectory: true
           }
         }
+      },
+      {
+        test: /\.svg$/,
+        use: [{
+            loader: 'svg-sprite-loader',
+            options: {
+              extract: true
+            }
+          },
+          'svg-fill-loader',
+          'svgo-loader'
+        ]
       }
     ]
   },
@@ -61,6 +75,18 @@ const webpackConfig = {
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery'
+    }),
+    new CleanWebpackPlugin([
+      path.resolve(__dirname, 'build')
+    ]),
+    new CopyWebpackPlugin([
+      {
+        from: 'source/index.pug',
+        to: 'index.pug'
+      }
+    ]),
+    new SpriteLoaderPlugin({
+      plainSprite: true
     })
   ]
 }
@@ -98,7 +124,10 @@ if (env == 'development') {
   )
 
   webpackConfig.plugins.push(
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new WriteFilePlugin({
+      test: /\.svg|.js|.pug$/
+    })
   )
 }
 
@@ -137,16 +166,7 @@ if (env == 'production') {
   )
 
   webpackConfig.plugins.push(
-    new CleanWebpackPlugin([
-      path.resolve(__dirname, 'build')
-    ]),
-    new ExtractTextPlugin('stylesheets/application.bundle.css'),
-    new CopyWebpackPlugin([
-      {
-        from: 'source/index.html',
-        to: 'index.html'
-      }
-    ])
+    new ExtractTextPlugin('css/app.bundle.css')
   )
 }
 

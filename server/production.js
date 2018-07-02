@@ -5,16 +5,22 @@ const morgan = require('morgan')
 
 const app = express()
 const server = http.createServer(app)
-const PORT = process.env.PORT || 5000
+const router = express.Router()
+const port = process.env.PORT || 5000
 
 app.use(morgan('combined'))
 
+app.set('view engine', 'pug')
+app.set('views', path.join(__dirname, '..', 'build'))
+
 app.use(express.static(path.resolve(__dirname, '..', 'build')))
 
-app.get('*', function (req, res) {
-  res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'))
+router.get('/', function (req, res, next) {
+  res.render('index')
 })
 
-server.listen(PORT, function () {
+app.use('/', router)
+
+server.listen(port, function () {
   console.log("Listening on port %s", server.address().port)
 })

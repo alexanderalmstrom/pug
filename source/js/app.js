@@ -1,6 +1,6 @@
-// application.js
+// app.js
 
-import 'application.scss'
+console.log('app.js')
 
 if (module.hot) {
   module.hot.accept()

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.1 (39012) - http://www.bohemiancoding.com/sketch -->
+    <title>Icon / icon-cross</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+        <g id="Icon-/-icon-cross" stroke="#000000">
+            <g transform="translate(5.000000, 5.000000)" id="Line">
+                <polyline transform="translate(5.000000, 7.674351) scale(1, -1) rotate(180.000000) translate(-5.000000, -7.674351) " points="0 10 4.99951143 5 10 10"></polyline>
+                <polyline transform="translate(5.000000, 2.325649) scale(1, -1) translate(-5.000000, -2.325649) " points="0 4.65129897 4.99951143 -0.348701031 10 4.65129897"></polyline>
+            </g>
+        </g>
+    </g>
+</svg>

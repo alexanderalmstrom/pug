@@ -11,9 +11,13 @@ const compiler = webpack(webpackConfig)
 
 const app = express()
 const server = http.createServer(app)
-const PORT = process.env.PORT || 5000
+const router = express.Router()
+const port = process.env.PORT || 5000
 
 app.use(morgan('dev'))
+
+app.set('view engine', 'pug')
+app.set('views', path.join(__dirname, '..', 'build'))
 
 app.use(require("webpack-dev-middleware")(compiler, {
   noInfo: true,
@@ -32,14 +36,12 @@ if (devConfig.proxy) {
   })
 }
 
-if (devConfig.historyApiFallback) {
-  console.log('404 responses will be forwarded to /index.html')
+router.get('/', function (req, res, next) {
+  res.render('index')
+})
 
-  app.get('*', function(req, res) {
-    res.sendFile(path.resolve(devConfig.contentBase, 'index.html'))
-  })
-}
+app.use('/', router)
 
-server.listen(PORT, function () {
+server.listen(port, function () {
   console.log("Listening on port %s", server.address().port)
 })

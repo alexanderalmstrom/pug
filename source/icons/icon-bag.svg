@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.1 (39012) - http://www.bohemiancoding.com/sketch -->
+    <title>Icon / icon-bag</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Icon-/-icon-bag" stroke="#000000">
+            <g id="icon-bag" transform="translate(4.000000, 2.000000)">
+                <rect id="Combined-Shape" x="0.5" y="4.5" width="11" height="11" rx="2"></rect>
+                <path d="M4,4.5 L4,1.996323 C4,1.16898297 4.67099078,0.5 5.5048815,0.5 L6.4951185,0.5 C7.32968878,0.5 8,1.16567458 8,1.996323 L8,4.5 L4,4.5 Z" id="Rectangle-2"></path>
+            </g>
+        </g>
+    </g>
+</svg>
