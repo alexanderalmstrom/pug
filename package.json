@@ -5,11 +5,11 @@
   "author": "Alexander Almström <info@alexanderalmstrom.com>",
   "license": "MIT",
   "scripts": {
-    "start": "yarn run server:dev",
-    "server:dev": "cross-env NODE_ENV=development node ./server/development",
-    "server:prod": "cross-env NODE_ENV=development node ./server/production",
-    "server:test": "cross-env NODE_ENV=development node ./server-test.js",
-    "build": "cross-env NODE_ENV=production webpack --bail -p"
+    "start": "cross-env NODE_ENV=development node ./server/development.js",
+    "production": "cross-env NODE_ENV=production node ./server/production.js",
+    "build": "cross-env NODE_ENV=production webpack --bail -p",
+    "heroku-postbuild": "yarn run build",
+    "deploy": "git push heroku master"
   },
   "dependencies": {
     "autoprefixer": "^8.3.0",
