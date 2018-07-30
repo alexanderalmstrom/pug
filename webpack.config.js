@@ -20,6 +20,7 @@ const webpackConfig = {
   },
 
   entry: [
+    'babel-polyfill',
     './source/main.js'
   ],
 
@@ -52,14 +53,14 @@ const webpackConfig = {
         }
       },
       {
-        test: /\.svg$/,
+        test: /\.svg(\?.*)?$/,
         use: [{
             loader: 'svg-sprite-loader',
             options: {
               extract: true
             }
           },
-          'svg-fill-loader',
+          'svg-transform-loader',
           'svgo-loader'
         ]
       }
@@ -69,7 +70,7 @@ const webpackConfig = {
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV)
       },
     }),
     new webpack.ProvidePlugin({

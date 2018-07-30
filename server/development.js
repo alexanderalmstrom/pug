@@ -3,7 +3,6 @@ const webpack = require('webpack')
 const express = require('express')
 const http = require('http')
 const morgan = require('morgan')
-const proxyMiddleware = require('http-proxy-middleware')
 
 const webpackConfig = require('../webpack.config')
 const devConfig = webpackConfig.devServer
@@ -29,12 +28,6 @@ app.use(require("webpack-hot-middleware")(compiler, {
   path: '/__webpack_hmr',
   heartbeat: 10 * 1000
 }))
-
-if (devConfig.proxy) {
-  Object.keys(devConfig.proxy).forEach(function (context) {
-    app.use(proxyMiddleware(context, devConfig.proxy[context]))
-  })
-}
 
 router.get('/', function (req, res, next) {
   res.render('index')
