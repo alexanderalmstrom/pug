@@ -1,4 +1,5 @@
 const path = require('path')
+const fs = require('fs')
 const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
@@ -11,37 +12,38 @@ const env = process.env.NODE_ENV
 
 const webpackConfig = {
   devServer: {
-    contentBase: path.resolve(__dirname, 'source'),
-    watchContentBase: false,
-    host: 'localhost',
-    port: 5000,
-    hot: true,
     publicPath: '/'
   },
 
   entry: [
-    'babel-polyfill',
     './source/main.js'
   ],
 
   resolve: {
     extensions: ['.scss', '.js', '.css', '.json'],
     modules: [
+      path.resolve(__dirname, 'node_modules'),
       path.resolve(__dirname, 'source', 'css'),
       path.resolve(__dirname, 'source', 'js'),
-      path.resolve(__dirname, 'source', 'icons'),
-      path.resolve(__dirname, 'node_modules')
+      path.resolve(__dirname, 'source', 'icons')
     ]
   },
 
   output: {
     path: path.resolve(__dirname, 'build'),
-    filename: 'js/app.bundle.js',
+    filename: 'js/[name].js',
     publicPath: '/'
   },
 
   module: {
     rules: [
+      {
+        test: /\.pug/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'file-loader'
+        }
+      },
       {
         test: /\.js$/,
         exclude: /node_modules/,
@@ -73,19 +75,13 @@ const webpackConfig = {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV)
       },
     }),
-    new webpack.ProvidePlugin({
-      $: 'jquery',
-      jQuery: 'jquery'
-    }),
     new CleanWebpackPlugin([
       path.resolve(__dirname, 'build')
     ]),
-    new CopyWebpackPlugin([
-      {
-        from: 'source/index.pug',
-        to: 'index.pug'
-      }
-    ]),
+    new CopyWebpackPlugin([{
+      from: 'source/html',
+      to: ''
+    }]),
     new SpriteLoaderPlugin({
       plainSprite: true
     })
@@ -136,6 +132,8 @@ if (env == 'development') {
 if (env == 'production') {
   webpackConfig.mode = 'production'
 
+  webpackConfig.output.filename = 'js/[name]-[hash].js',
+
   webpackConfig.module.rules.push(
     {
       test: /\.scss$/,
@@ -167,7 +165,38 @@ if (env == 'production') {
   )
 
   webpackConfig.plugins.push(
-    new ExtractTextPlugin('css/app.bundle.css')
+    new ExtractTextPlugin('css/[name]-[hash].css'),
+    function () {
+      this.plugin('done', function (stats) {
+        let replaceInFile = function (filePath, toReplace, replacement) {
+          let replacer = function (match) {
+            console.log('Replacing in %s: %s => %s', filePath, match, replacement)
+            return replacement
+          }
+
+          let str = fs.readFileSync(filePath, 'utf8')
+          let out = str.replace(new RegExp(toReplace, 'g'), replacer)
+
+          fs.writeFileSync(filePath, out)
+        }
+
+        let hash = stats.hash
+
+        setTimeout(function () {
+          replaceInFile(
+            path.resolve(__dirname, 'build', 'index.pug'),
+            '/js/main.js',
+            '/js/main-' + hash + '.js'
+          )
+
+          replaceInFile(
+            path.resolve(__dirname, 'build', 'index.pug'),
+            '/css/main.css',
+            '/css/main-' + hash + '.css'
+          )
+        }, 1000)
+      })
+    }
   )
 }
 

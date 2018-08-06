@@ -5,8 +5,8 @@
   "author": "Alexander Almström <info@alexanderalmstrom.com>",
   "license": "MIT",
   "scripts": {
-    "start": "cross-env NODE_ENV=development node ./server/development.js",
-    "production": "cross-env NODE_ENV=production node ./server/production.js",
+    "start": "cross-env NODE_ENV=development node ./server/index.js",
+    "production": "cross-env NODE_ENV=production node ./server/index.js",
     "server": "yarn run production",
     "build": "cross-env NODE_ENV=production webpack --bail -p",
     "heroku-postbuild": "yarn run build",
@@ -26,6 +26,7 @@
     "css-loader": "^0.28.9",
     "express": "^4.16.2",
     "extract-text-webpack-plugin": "v4.0.0-alpha.0",
+    "file-loader": "^1.1.11",
     "jquery": "^3.3.1",
     "morgan": "^1.9.0",
     "node-sass": "^4.7.2",
