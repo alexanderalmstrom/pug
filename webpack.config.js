@@ -11,10 +11,6 @@ const config = require('./index.js')
 const env = process.env.NODE_ENV
 
 const webpackConfig = {
-  devServer: {
-    publicPath: '/'
-  },
-
   entry: [
     './source/main.js'
   ],
@@ -182,19 +178,17 @@ if (env == 'production') {
 
         let hash = stats.hash
 
-        setTimeout(function () {
-          replaceInFile(
-            path.resolve(__dirname, 'build', 'index.pug'),
-            '/js/main.js',
-            '/js/main-' + hash + '.js'
-          )
+        replaceInFile(
+          path.resolve(__dirname, 'build', 'index.pug'),
+          '/js/main.js',
+          '/js/main-' + hash + '.js'
+        )
 
-          replaceInFile(
-            path.resolve(__dirname, 'build', 'index.pug'),
-            '/css/main.css',
-            '/css/main-' + hash + '.css'
-          )
-        }, 1000)
+        replaceInFile(
+          path.resolve(__dirname, 'build', 'index.pug'),
+          '/css/main.css',
+          '/css/main-' + hash + '.css'
+        )
       })
     }
   )

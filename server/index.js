@@ -3,7 +3,6 @@ const webpack = require('webpack')
 const express = require('express')
 const http = require('http')
 const morgan = require('morgan')
-
 const webpackConfig = require('../webpack.config')
 
 const env = process.env.NODE_ENV
@@ -16,7 +15,6 @@ const port = process.env.PORT || 5000
 if (env == "development") {
   app.use(morgan('dev'))
 
-  const devConfig = webpackConfig.devServer
   const compiler = webpack(webpackConfig)
 
   app.use(require("webpack-dev-middleware")(compiler, {
@@ -33,9 +31,9 @@ if (env == "development") {
 
 if (env == "production") {
   app.use(morgan('combined'))
-
-  app.use(express.static(path.resolve(__dirname, '..', 'build')))
 }
+
+app.use(express.static(path.resolve(__dirname, '..', 'build')))
 
 app.set('view engine', 'pug')
 app.set('views', path.join(__dirname, '..', 'build'))

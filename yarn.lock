@@ -980,14 +980,6 @@ boom@2.x.x:
   dependencies:
     hoek "2.x.x"
 
-bourbon-neat@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/bourbon-neat/-/bourbon-neat-3.0.0.tgz#5cc33b9951193f40b901a92aee82aa6b8066ff82"
-
-bourbon@^5.0.0:
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/bourbon/-/bourbon-5.0.1.tgz#70ac5c529a7d9e8f1cda088ca2fee2f0a20ea4f6"
-
 brace-expansion@^1.1.7:
   version "1.1.11"
   resolved "https://registry.yarnpkg.com/brace-expansion/-/brace-expansion-1.1.11.tgz#3c7fcbf529d87226f3d2f52b966ff5271eb441dd"
@@ -3166,10 +3158,6 @@ isstream@~0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/isstream/-/isstream-0.1.2.tgz#47e63f7af55afa6f92e1500e690eb8b8529c099a"
 
-jquery@^3.3.1:
-  version "3.3.1"
-  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.3.1.tgz#958ce29e81c9790f31be7792df5d4d95fc57fbca"
-
 js-base64@^2.1.8, js-base64@^2.1.9:
   version "2.4.5"
   resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.4.5.tgz#e293cd3c7c82f070d700fc7a1ca0a2e69f101f92"
@@ -3867,10 +3855,6 @@ normalize-url@^1.4.0:
     prepend-http "^1.0.0"
     query-string "^4.1.0"
     sort-keys "^1.0.0"
-
-normalize.css@^8.0.0:
-  version "8.0.0"
-  resolved "https://registry.yarnpkg.com/normalize.css/-/normalize.css-8.0.0.tgz#14ac5e461612538a4ce9be90a7da23f86e718493"
 
 npm-bundled@^1.0.1:
   version "1.0.3"
