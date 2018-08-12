@@ -179,13 +179,13 @@ if (env == 'production') {
         let hash = stats.hash
 
         replaceInFile(
-          path.resolve(__dirname, 'build', 'index.pug'),
+          path.resolve(__dirname, 'build', 'layout.pug'),
           '/js/main.js',
           '/js/main-' + hash + '.js'
         )
 
         replaceInFile(
-          path.resolve(__dirname, 'build', 'index.pug'),
+          path.resolve(__dirname, 'build', 'layout.pug'),
           '/css/main.css',
           '/css/main-' + hash + '.css'
         )
