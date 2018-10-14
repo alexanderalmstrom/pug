@@ -163,7 +163,7 @@ if (env == 'production') {
   webpackConfig.plugins.push(
     new ExtractTextPlugin('css/[name]-[hash].css'),
     new WebpackRev({
-      replaceIn: 'build/layout.pug'
+      replaceIn: path.join(webpackConfig.output.path , 'layout.pug')
     }, [
       {
         filePath: 'js/main',
