@@ -1,11 +1,11 @@
 const path = require('path')
-const fs = require('fs')
 const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const WriteFilePlugin = require('write-file-webpack-plugin')
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin')
+const WebpackRev = require('./plugins/webpack-rev.js')
 
 const config = require('./index.js')
 const env = process.env.NODE_ENV
@@ -162,35 +162,18 @@ if (env == 'production') {
 
   webpackConfig.plugins.push(
     new ExtractTextPlugin('css/[name]-[hash].css'),
-    function () {
-      this.plugin('done', function (stats) {
-        let replaceInFile = function (filePath, toReplace, replacement) {
-          let replacer = function (match) {
-            console.log('Replacing in %s: %s => %s', filePath, match, replacement)
-            return replacement
-          }
-
-          let str = fs.readFileSync(filePath, 'utf8')
-          let out = str.replace(new RegExp(toReplace, 'g'), replacer)
-
-          fs.writeFileSync(filePath, out)
-        }
-
-        let hash = stats.hash
-
-        replaceInFile(
-          path.resolve(__dirname, 'build', 'layout.pug'),
-          '/js/main.js',
-          '/js/main-' + hash + '.js'
-        )
-
-        replaceInFile(
-          path.resolve(__dirname, 'build', 'layout.pug'),
-          '/css/main.css',
-          '/css/main-' + hash + '.css'
-        )
-      })
-    }
+    new WebpackRev({
+      replaceIn: 'build/layout.pug'
+    }, [
+      {
+        filePath: 'js/main',
+        extension: '.js'
+      },
+      {
+        filePath: '/css/main',
+        extension: '.css'
+      }
+    ])
   )
 }
 
