@@ -1,7 +1,7 @@
 const path = require('path')
 const fs = require('fs')
 
-function WebpackRev (options, assets) {
+function Rev (options, assets) {
   this.options = options
   this.assets = assets
 
@@ -11,7 +11,7 @@ function WebpackRev (options, assets) {
   }
 }
 
-WebpackRev.prototype.apply = function (compiler) {
+Rev.prototype.apply = function (compiler) {
   const options = Object.assign(this.defaults, this.options)
   const assets = this.assets
 
@@ -43,4 +43,4 @@ WebpackRev.prototype.apply = function (compiler) {
   })
 }
 
-module.exports = WebpackRev
+module.exports = Rev

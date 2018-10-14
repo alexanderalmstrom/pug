@@ -5,7 +5,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const WriteFilePlugin = require('write-file-webpack-plugin')
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin')
-const WebpackRev = require('./plugins/webpack-rev.js')
+const RevPlugin = require('./plugins/rev.js')
 
 const env = process.env.NODE_ENV
 const config = require('./index.js')
@@ -160,7 +160,7 @@ if (env == 'production') {
 
   webpackConfig.plugins.push(
     new ExtractTextPlugin('css/[name]-[hash].css'),
-    new WebpackRev({
+    new RevPlugin({
       replaceIn: path.join(config.buildDir , 'layout.pug')
     }, [
       {
