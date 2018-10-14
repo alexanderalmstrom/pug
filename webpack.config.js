@@ -7,10 +7,12 @@ const WriteFilePlugin = require('write-file-webpack-plugin')
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin')
 const WebpackRev = require('./plugins/webpack-rev.js')
 
-const config = require('./index.js')
 const env = process.env.NODE_ENV
+const config = require('./index.js')
 
 const webpackConfig = {
+  mode: env,
+
   entry: [
     './source/main.js'
   ],
@@ -26,7 +28,7 @@ const webpackConfig = {
   },
 
   output: {
-    path: path.resolve(__dirname, 'build'),
+    path: path.resolve(__dirname, config.buildDir),
     filename: 'js/[name].js',
     publicPath: '/'
   },
@@ -72,7 +74,7 @@ const webpackConfig = {
       },
     }),
     new CleanWebpackPlugin([
-      path.resolve(__dirname, 'build')
+      path.resolve(__dirname, config.buildDir)
     ]),
     new CopyWebpackPlugin([{
       from: 'source/html',
@@ -86,8 +88,6 @@ const webpackConfig = {
 
 // Development
 if (env == 'development') {
-  webpackConfig.mode = 'development'
-
   webpackConfig.entry.unshift(
     'webpack-hot-middleware/client'
   )
@@ -126,8 +126,6 @@ if (env == 'development') {
 
 // Production
 if (env == 'production') {
-  webpackConfig.mode = 'production'
-
   webpackConfig.output.filename = 'js/[name]-[hash].js',
 
   webpackConfig.module.rules.push(
@@ -163,7 +161,7 @@ if (env == 'production') {
   webpackConfig.plugins.push(
     new ExtractTextPlugin('css/[name]-[hash].css'),
     new WebpackRev({
-      replaceIn: path.join(webpackConfig.output.path , 'layout.pug')
+      replaceIn: path.join(config.buildDir , 'layout.pug')
     }, [
       {
         filePath: 'js/main',
